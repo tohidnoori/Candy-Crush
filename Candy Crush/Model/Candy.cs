@@ -26,6 +26,19 @@ namespace Candy_Crush
                 return true ;
             return false ;
         }
+
+        public bool CanChange(Position other)
+        {
+            if (Math.Abs(other.x - x) == 1 && other.y - y == 0)
+            {
+                return true ;
+            }
+            if (Math.Abs(other.y - y) == 1 && other.x - x == 0)
+            {
+                return true;
+            }
+            return false ;
+        }
     }
     internal class Candy
     {

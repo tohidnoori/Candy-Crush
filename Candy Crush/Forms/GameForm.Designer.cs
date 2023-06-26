@@ -30,6 +30,7 @@
         {
             this.movesLbl = new System.Windows.Forms.Label();
             this.scoreLbl = new System.Windows.Forms.Label();
+            this.recordLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // movesLbl
@@ -52,11 +53,22 @@
             this.scoreLbl.TabIndex = 1;
             this.scoreLbl.Text = "Score : 0";
             // 
+            // recordLbl
+            // 
+            this.recordLbl.AutoSize = true;
+            this.recordLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.recordLbl.Location = new System.Drawing.Point(1162, 228);
+            this.recordLbl.Name = "recordLbl";
+            this.recordLbl.Size = new System.Drawing.Size(87, 20);
+            this.recordLbl.TabIndex = 2;
+            this.recordLbl.Text = "Record : 0";
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 865);
+            this.Controls.Add(this.recordLbl);
             this.Controls.Add(this.scoreLbl);
             this.Controls.Add(this.movesLbl);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -75,5 +87,6 @@
 
         private System.Windows.Forms.Label movesLbl;
         private System.Windows.Forms.Label scoreLbl;
+        private System.Windows.Forms.Label recordLbl;
     }
 }

@@ -34,6 +34,8 @@
             this.Wins = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Record = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Friend = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.showMyFriendReqBtn = new System.Windows.Forms.Button();
+            this.showListOFPlayersBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerListView
@@ -52,10 +54,12 @@
             this.PlayerListView.MultiSelect = false;
             this.PlayerListView.Name = "PlayerListView";
             this.PlayerListView.ShowItemToolTips = true;
-            this.PlayerListView.Size = new System.Drawing.Size(657, 785);
+            this.PlayerListView.Size = new System.Drawing.Size(516, 785);
             this.PlayerListView.TabIndex = 1;
             this.PlayerListView.UseCompatibleStateImageBehavior = false;
             this.PlayerListView.View = System.Windows.Forms.View.Details;
+            this.PlayerListView.SelectedIndexChanged += new System.EventHandler(this.PlayerListView_SelectedIndexChanged);
+            this.PlayerListView.Click += new System.EventHandler(this.PlayerListView_Click);
             // 
             // Id
             // 
@@ -84,16 +88,39 @@
             // 
             this.Friend.Text = "Friend";
             // 
-            // SendFriendRequest
+            // showMyFriendReqBtn
+            // 
+            this.showMyFriendReqBtn.Location = new System.Drawing.Point(552, 125);
+            this.showMyFriendReqBtn.Name = "showMyFriendReqBtn";
+            this.showMyFriendReqBtn.Size = new System.Drawing.Size(181, 70);
+            this.showMyFriendReqBtn.TabIndex = 2;
+            this.showMyFriendReqBtn.Text = "My friend request";
+            this.showMyFriendReqBtn.UseVisualStyleBackColor = true;
+            this.showMyFriendReqBtn.Click += new System.EventHandler(this.showMyFriendReqBtn_Click);
+            // 
+            // showListOFPlayersBtn
+            // 
+            this.showListOFPlayersBtn.Location = new System.Drawing.Point(552, 21);
+            this.showListOFPlayersBtn.Name = "showListOFPlayersBtn";
+            this.showListOFPlayersBtn.Size = new System.Drawing.Size(181, 70);
+            this.showListOFPlayersBtn.TabIndex = 3;
+            this.showListOFPlayersBtn.Text = "List of players";
+            this.showListOFPlayersBtn.UseVisualStyleBackColor = true;
+            this.showListOFPlayersBtn.Click += new System.EventHandler(this.showListOFPlayersBtn_Click);
+            // 
+            // SendFriendRequestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 853);
+            this.ClientSize = new System.Drawing.Size(752, 853);
+            this.Controls.Add(this.showListOFPlayersBtn);
+            this.Controls.Add(this.showMyFriendReqBtn);
             this.Controls.Add(this.PlayerListView);
-            this.MaximumSize = new System.Drawing.Size(700, 900);
-            this.MinimumSize = new System.Drawing.Size(700, 900);
-            this.Name = "SendFriendRequest";
+            this.MaximumSize = new System.Drawing.Size(770, 900);
+            this.MinimumSize = new System.Drawing.Size(770, 900);
+            this.Name = "SendFriendRequestForm";
             this.Text = "ChoosePlayerForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SendFriendRequestForm_FormClosed);
             this.Load += new System.EventHandler(this.SendFriendRequest_Load);
             this.ResumeLayout(false);
 
@@ -107,5 +134,7 @@
         private System.Windows.Forms.ColumnHeader Wins;
         private System.Windows.Forms.ColumnHeader Record;
         private System.Windows.Forms.ColumnHeader Friend;
+        private System.Windows.Forms.Button showMyFriendReqBtn;
+        private System.Windows.Forms.Button showListOFPlayersBtn;
     }
 }

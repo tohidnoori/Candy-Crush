@@ -33,6 +33,8 @@
             this.Username = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Wins = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Record = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.choosePlayerBtn = new System.Windows.Forms.Button();
+            this.showMyGamesBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PlayerListView
@@ -50,7 +52,7 @@
             this.PlayerListView.MultiSelect = false;
             this.PlayerListView.Name = "PlayerListView";
             this.PlayerListView.ShowItemToolTips = true;
-            this.PlayerListView.Size = new System.Drawing.Size(657, 785);
+            this.PlayerListView.Size = new System.Drawing.Size(513, 785);
             this.PlayerListView.TabIndex = 1;
             this.PlayerListView.UseCompatibleStateImageBehavior = false;
             this.PlayerListView.View = System.Windows.Forms.View.Details;
@@ -65,30 +67,53 @@
             // 
             this.Username.Text = "Name";
             this.Username.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Username.Width = 186;
+            this.Username.Width = 145;
             // 
             // Wins
             // 
             this.Wins.Text = "Wins";
             this.Wins.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Wins.Width = 78;
+            this.Wins.Width = 119;
             // 
             // Record
             // 
             this.Record.Text = "Record";
             this.Record.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Record.Width = 90;
+            this.Record.Width = 89;
+            // 
+            // choosePlayerBtn
+            // 
+            this.choosePlayerBtn.Location = new System.Drawing.Point(547, 21);
+            this.choosePlayerBtn.Name = "choosePlayerBtn";
+            this.choosePlayerBtn.Size = new System.Drawing.Size(181, 70);
+            this.choosePlayerBtn.TabIndex = 5;
+            this.choosePlayerBtn.Text = "Choose Player";
+            this.choosePlayerBtn.UseVisualStyleBackColor = true;
+            this.choosePlayerBtn.Click += new System.EventHandler(this.choosePlayerBtn_Click);
+            // 
+            // showMyGamesBtn
+            // 
+            this.showMyGamesBtn.Location = new System.Drawing.Point(547, 125);
+            this.showMyGamesBtn.Name = "showMyGamesBtn";
+            this.showMyGamesBtn.Size = new System.Drawing.Size(181, 70);
+            this.showMyGamesBtn.TabIndex = 4;
+            this.showMyGamesBtn.Text = "My games";
+            this.showMyGamesBtn.UseVisualStyleBackColor = true;
+            this.showMyGamesBtn.Click += new System.EventHandler(this.showMyGamesBtnBtn_Click);
             // 
             // ChoosePlayerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 853);
+            this.ClientSize = new System.Drawing.Size(752, 853);
+            this.Controls.Add(this.choosePlayerBtn);
+            this.Controls.Add(this.showMyGamesBtn);
             this.Controls.Add(this.PlayerListView);
-            this.MaximumSize = new System.Drawing.Size(700, 900);
-            this.MinimumSize = new System.Drawing.Size(700, 900);
+            this.MaximumSize = new System.Drawing.Size(770, 900);
+            this.MinimumSize = new System.Drawing.Size(770, 900);
             this.Name = "ChoosePlayerForm";
             this.Text = "ChoosePlayerForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ChoosePlayerForm_FormClosed);
             this.Load += new System.EventHandler(this.ChoosePlayerForm_Load);
             this.ResumeLayout(false);
 
@@ -101,5 +126,7 @@
         private System.Windows.Forms.ColumnHeader Username;
         private System.Windows.Forms.ColumnHeader Wins;
         private System.Windows.Forms.ColumnHeader Record;
+        private System.Windows.Forms.Button choosePlayerBtn;
+        private System.Windows.Forms.Button showMyGamesBtn;
     }
 }

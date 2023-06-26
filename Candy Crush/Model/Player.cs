@@ -14,7 +14,6 @@ namespace Candy_Crush
         public string Username { get; set; }
 
         public string Password { get; set; }
-
         public int Record { get; set; } 
         public int Wins { get; set; } 
         public int Loses { get; set; } 
@@ -26,12 +25,16 @@ namespace Candy_Crush
     
         public string PlayerToFileFormat()
         {
+            return $"{Id},{Username},{Password},{Wins},{Loses},{Record},{FriendListToString()}";
+        }
+        public string FriendListToString()
+        {
             string friendListString = "";
-            for (int i =0;i< FriendList.Count(); i++)
+            for (int i = 0; i < FriendList.Count(); i++)
             {
-                friendListString += FriendList[i].ToString()+ "-";
+                friendListString += FriendList[i].ToString() + "-";
             }
-            return $"{Id},{Username},{Password},{Wins},{Loses},{Record},{friendListString}";
+            return friendListString;
         }
         public void SavePlayerDataToFile()
         {
@@ -44,6 +47,19 @@ namespace Candy_Crush
             File.WriteAllText(path,this.PlayerToFileFormat());
         }
 
+        public List<int> FriendListFromString(string str)
+        {
+            var friendList = str.Split('-').ToList();
+            List<int> friendIdList = new List<int>();
+            //MessageBox.Show(friendList.Count().ToString());
+            friendList.ForEach(friendId => {
+                if (friendId != "")
+                {
+                    friendIdList.Add(int.Parse(friendId));
+                }
+            });
+            return friendIdList;
+        }
         public Player LoadPlayerDataFromFile()
         {
             string path = @"D:\candy_crush.txt";

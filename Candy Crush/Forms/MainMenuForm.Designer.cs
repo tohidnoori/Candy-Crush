@@ -31,6 +31,7 @@
             this.SinglePlayerBtn = new System.Windows.Forms.Button();
             this.TowPlayerBtn = new System.Windows.Forms.Button();
             this.friendRequestBtn = new System.Windows.Forms.Button();
+            this.logoutBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SinglePlayerBtn
@@ -66,12 +67,25 @@
             this.friendRequestBtn.TabIndex = 2;
             this.friendRequestBtn.Text = "Friend Request";
             this.friendRequestBtn.UseVisualStyleBackColor = true;
+            this.friendRequestBtn.Click += new System.EventHandler(this.friendRequestBtn_Click);
+            // 
+            // logoutBtn
+            // 
+            this.logoutBtn.Font = new System.Drawing.Font("Microsoft Uighur", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logoutBtn.Location = new System.Drawing.Point(12, 12);
+            this.logoutBtn.Name = "logoutBtn";
+            this.logoutBtn.Size = new System.Drawing.Size(143, 56);
+            this.logoutBtn.TabIndex = 3;
+            this.logoutBtn.Text = "Logout";
+            this.logoutBtn.UseVisualStyleBackColor = true;
+            this.logoutBtn.Click += new System.EventHandler(this.logoutBtn_Click);
             // 
             // MainMenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1309, 865);
+            this.Controls.Add(this.logoutBtn);
             this.Controls.Add(this.friendRequestBtn);
             this.Controls.Add(this.TowPlayerBtn);
             this.Controls.Add(this.SinglePlayerBtn);
@@ -89,5 +103,6 @@
         private System.Windows.Forms.Button SinglePlayerBtn;
         private System.Windows.Forms.Button TowPlayerBtn;
         private System.Windows.Forms.Button friendRequestBtn;
+        private System.Windows.Forms.Button logoutBtn;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,24 @@ namespace Candy_Crush.Forms
             form.ShowDialog();
             this.Close();
 
+        }
+
+        private void friendRequestBtn_Click(object sender, EventArgs e)
+        {
+            SendFriendRequestForm form = new SendFriendRequestForm();
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
+        }
+
+        private void logoutBtn_Click(object sender, EventArgs e)
+        {
+            string path = @"D:\candy_crush.txt";
+            File.WriteAllText(path, "");
+            Form1 form = new Form1();
+            this.Hide();
+            form.ShowDialog();
+            this.Close();
         }
     }
 }

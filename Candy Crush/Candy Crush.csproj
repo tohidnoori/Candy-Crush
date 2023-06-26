@@ -87,6 +87,7 @@
     <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\FriendReq.cs" />
     <Compile Include="Model\Game.cs" />
     <Compile Include="Forms\GameForm.cs">
       <SubType>Form</SubType>
@@ -100,6 +101,7 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model\GameDbModel.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
