@@ -18,7 +18,7 @@ namespace Candy_Crush.Forms
     {
         Player currentPlayer = new Player().LoadPlayerDataFromFile();
         private string whichList = "FriendList";
-        List<GameDbModel> gameList = new List<GameDbModel>();
+        List<Competetion> competionList = new List<Competetion>();
 
         public ChoosePlayerForm()
         {
@@ -79,7 +79,7 @@ namespace Candy_Crush.Forms
             {
                 list.ForEach(p =>
                 {
-                    AddGameToList(p as GameDbModel);
+                    AddGameToList(p as Competetion);
                 });
 
             }
@@ -90,23 +90,23 @@ namespace Candy_Crush.Forms
             var todoListItem = new ListViewItem(todoData);
             PlayerListView.Items.Add(todoListItem);
         }
-        private void AddGameToList(GameDbModel gameDb)
+        private void AddGameToList(Competetion competetion)
         {
             int myScore, otherScore;
             string winner;
-            if (gameDb.Player1Id == currentPlayer.Id)
+            if (competetion.Player1Id == currentPlayer.Id)
             {
-                myScore = gameDb.Player1Score;
-                otherScore = gameDb.Player2Score;
+                myScore = competetion.Player1Score;
+                otherScore = competetion.Player2Score;
             }
             else
             {
-                myScore = gameDb.Player2Score;
-                otherScore = gameDb.Player1Score;
+                myScore = competetion.Player2Score;
+                otherScore = competetion.Player1Score;
             }
-            if (gameDb.Player1Score != 0 && gameDb.Player2Score != 0)
+            if (competetion.Player1Score != 0 && competetion.Player2Score != 0)
             {
-                if (gameDb.WinnerId == currentPlayer.Id)
+                if (competetion.WinnerId == currentPlayer.Id)
                 {
                     winner = "Yes";
                 }
@@ -119,7 +119,7 @@ namespace Candy_Crush.Forms
             {
                 winner = "None";
             }
-            var todoData = new string[] { gameDb.Id.ToString(), myScore.ToString(), otherScore.ToString(), winner };
+            var todoData = new string[] { competetion.Id.ToString(), myScore.ToString(), otherScore.ToString(), winner };
             var todoListItem = new ListViewItem(todoData);
             PlayerListView.Items.Add(todoListItem);
         }
@@ -157,8 +157,8 @@ namespace Candy_Crush.Forms
             int count = reader.GetInt32(0);
             reader.Close();
             Game newGame = new Game(10);
-            newGame.MakeRandomGameTable();
-            string gameTableString = newGame.GameTableToString();
+            newGame.MakeRandomGameMatrix();
+            string gameTableString = newGame.GameMatrixToString();
             command = new SqlCommand($"Insert into Game(Id,player1Id,player2Id,gameTable,player1Score,player2Score,winnerId,gameStatus) values (@id,@player1Id,@player2Id,@gameTable,0,0,0,0)", connection);
             command.Parameters.AddWithValue("@id", (count + 1));
             command.Parameters.AddWithValue("@player1Id", currentPlayer.Id);
@@ -175,15 +175,15 @@ namespace Candy_Crush.Forms
             this.Close();
         }
 
-        private List<GameDbModel> GetGameListFromDataBase(SqlConnection connection)
+        private List<Competetion> GetGameListFromDataBase(SqlConnection connection)
         {
             SqlCommand command = new SqlCommand($"Select * from Game where (player1Id={currentPlayer.Id} OR player2Id = {currentPlayer.Id})", connection);
             var gameReader = command.ExecuteReader();
 
-            gameList.Clear();
+            competionList.Clear();
             while (gameReader.Read())
             {
-                gameList.Add(new GameDbModel()
+                competionList.Add(new Competetion()
                 {
                     Id = gameReader.GetInt32(0),
                     WinnerId = gameReader.GetInt32(1),
@@ -196,7 +196,7 @@ namespace Candy_Crush.Forms
                 });
             }
             gameReader.Close();
-            return gameList;
+            return competionList;
         }
         private void ChoosePlayerForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -237,7 +237,7 @@ namespace Candy_Crush.Forms
                 var selectedGame = PlayerListView.SelectedItems[0];
                 if (selectedGame != null && selectedGame.SubItems[3].Text == "None")
                 {
-                    GameDbModel g = gameList[selectedGame.Index];
+                    Competetion g = competionList[selectedGame.Index];
                     if ((currentPlayer.Id == g.Player1Id && g.Player1Score == 0) || (currentPlayer.Id == g.Player2Id && g.Player2Score == 0))
                     {
                         DialogResult dialogResult = MessageBox.Show($"You have unfinished game do you wanna play?", "Friend game battle", MessageBoxButtons.YesNo);

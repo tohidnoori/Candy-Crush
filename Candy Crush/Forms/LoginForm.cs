@@ -15,6 +15,8 @@ namespace Candy_Crush
 {
     public partial class LoginForm : Form
     {
+        private bool isHide = true;
+
         public LoginForm()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace Candy_Crush
 
         private void goSingInPageLbl_MouseEnter(object sender, EventArgs e)
         {
-            goSingInPageLbl.ForeColor = Color.Blue;
+            goSingInPageLbl.ForeColor = Color.LightPink;
 
         }
 
@@ -125,7 +127,21 @@ namespace Candy_Crush
             reader.Close();
         }
 
-        
+        private void eyePass_Click(object sender, EventArgs e)
+        {
+            if(isHide)
+            {
+                passwordTxt.UseSystemPasswordChar= false;
+                eyePass.BackgroundImage = Image.FromFile(@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\eye_hide.jpg");
+                isHide = false;
+            }
+            else
+            {
+                isHide= true;
+                eyePass.BackgroundImage = Image.FromFile(@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\eye_unhide.jpg");
+                passwordTxt.UseSystemPasswordChar = true;
+            }
+        }
     }
 
 }

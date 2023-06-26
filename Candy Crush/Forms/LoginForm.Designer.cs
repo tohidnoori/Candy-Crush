@@ -35,13 +35,16 @@
             this.passwordLbl = new System.Windows.Forms.Label();
             this.usernameTxt = new System.Windows.Forms.TextBox();
             this.goSingInPageLbl = new System.Windows.Forms.Label();
+            this.eyePass = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LogInBtn
             // 
             resources.ApplyResources(this.LogInBtn, "LogInBtn");
+            this.LogInBtn.BackColor = System.Drawing.SystemColors.Highlight;
+            this.LogInBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LogInBtn.Name = "LogInBtn";
-            this.LogInBtn.UseVisualStyleBackColor = true;
+            this.LogInBtn.UseVisualStyleBackColor = false;
             this.LogInBtn.Click += new System.EventHandler(this.LogInBtn_Click);
             // 
             // passwordTxt
@@ -49,16 +52,19 @@
             this.passwordTxt.AllowDrop = true;
             resources.ApplyResources(this.passwordTxt, "passwordTxt");
             this.passwordTxt.Name = "passwordTxt";
+            this.passwordTxt.UseSystemPasswordChar = true;
             this.passwordTxt.TextChanged += new System.EventHandler(this.passwordTxt_TextChanged);
             // 
             // usernameLbl
             // 
             resources.ApplyResources(this.usernameLbl, "usernameLbl");
+            this.usernameLbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.usernameLbl.Name = "usernameLbl";
             // 
             // passwordLbl
             // 
             resources.ApplyResources(this.passwordLbl, "passwordLbl");
+            this.passwordLbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.passwordLbl.Name = "passwordLbl";
             // 
             // usernameTxt
@@ -78,16 +84,28 @@
             this.goSingInPageLbl.MouseLeave += new System.EventHandler(this.goSingInPageLbl_MouseLeave);
             this.goSingInPageLbl.MouseHover += new System.EventHandler(this.goSingInPageLbl_MouseHover);
             // 
+            // eyePass
+            // 
+            this.eyePass.BackgroundImage = global::Candy_Crush.Properties.Resources.eye_unhide;
+            resources.ApplyResources(this.eyePass, "eyePass");
+            this.eyePass.Name = "eyePass";
+            this.eyePass.UseVisualStyleBackColor = true;
+            this.eyePass.Click += new System.EventHandler(this.eyePass_Click);
+            // 
             // LoginForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.Controls.Add(this.eyePass);
             this.Controls.Add(this.goSingInPageLbl);
             this.Controls.Add(this.passwordLbl);
             this.Controls.Add(this.usernameLbl);
             this.Controls.Add(this.usernameTxt);
             this.Controls.Add(this.passwordTxt);
             this.Controls.Add(this.LogInBtn);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LoginForm";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
@@ -103,6 +121,7 @@
         private System.Windows.Forms.Label passwordLbl;
         private System.Windows.Forms.TextBox usernameTxt;
         private System.Windows.Forms.Label goSingInPageLbl;
+        private System.Windows.Forms.Button eyePass;
     }
 }
 

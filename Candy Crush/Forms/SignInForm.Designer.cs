@@ -36,6 +36,7 @@
             this.cnfPasswordLbl = new System.Windows.Forms.Label();
             this.cnfPasswordTxt = new System.Windows.Forms.TextBox();
             this.goLoginPageLbl = new System.Windows.Forms.Label();
+            this.eyePass = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // usernameTxt
@@ -44,12 +45,13 @@
             this.usernameTxt.Location = new System.Drawing.Point(270, 152);
             this.usernameTxt.MaxLength = 35;
             this.usernameTxt.Name = "usernameTxt";
-            this.usernameTxt.Size = new System.Drawing.Size(370, 32);
+            this.usernameTxt.Size = new System.Drawing.Size(319, 32);
             this.usernameTxt.TabIndex = 0;
             // 
             // usernameLbl
             // 
-            this.usernameLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.usernameLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.usernameLbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.usernameLbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.usernameLbl.Location = new System.Drawing.Point(94, 133);
             this.usernameLbl.MaximumSize = new System.Drawing.Size(150, 70);
@@ -66,13 +68,14 @@
             this.passwordTxt.MaximumSize = new System.Drawing.Size(700, 70);
             this.passwordTxt.MaxLength = 35;
             this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.PasswordChar = '*';
-            this.passwordTxt.Size = new System.Drawing.Size(370, 32);
+            this.passwordTxt.Size = new System.Drawing.Size(319, 32);
             this.passwordTxt.TabIndex = 1;
+            this.passwordTxt.UseSystemPasswordChar = true;
             // 
             // passwordLbl
             // 
-            this.passwordLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.passwordLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.passwordLbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.passwordLbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.passwordLbl.Location = new System.Drawing.Point(94, 241);
             this.passwordLbl.MaximumSize = new System.Drawing.Size(150, 70);
@@ -85,7 +88,9 @@
             // LogInBtn
             // 
             this.LogInBtn.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.LogInBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
+            this.LogInBtn.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.LogInBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogInBtn.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.LogInBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.LogInBtn.Location = new System.Drawing.Point(112, 463);
             this.LogInBtn.Margin = new System.Windows.Forms.Padding(10);
@@ -95,12 +100,13 @@
             this.LogInBtn.Size = new System.Drawing.Size(528, 60);
             this.LogInBtn.TabIndex = 4;
             this.LogInBtn.Text = "Sign in";
-            this.LogInBtn.UseVisualStyleBackColor = true;
+            this.LogInBtn.UseVisualStyleBackColor = false;
             this.LogInBtn.Click += new System.EventHandler(this.LogInBtn_Click);
             // 
             // cnfPasswordLbl
             // 
-            this.cnfPasswordLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F);
+            this.cnfPasswordLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cnfPasswordLbl.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.cnfPasswordLbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cnfPasswordLbl.Location = new System.Drawing.Point(94, 347);
             this.cnfPasswordLbl.MaximumSize = new System.Drawing.Size(150, 70);
@@ -117,21 +123,21 @@
             this.cnfPasswordTxt.MaximumSize = new System.Drawing.Size(700, 70);
             this.cnfPasswordTxt.MaxLength = 35;
             this.cnfPasswordTxt.Name = "cnfPasswordTxt";
-            this.cnfPasswordTxt.PasswordChar = '*';
-            this.cnfPasswordTxt.Size = new System.Drawing.Size(370, 32);
+            this.cnfPasswordTxt.Size = new System.Drawing.Size(319, 32);
             this.cnfPasswordTxt.TabIndex = 3;
+            this.cnfPasswordTxt.UseSystemPasswordChar = true;
             // 
             // goLoginPageLbl
             // 
             this.goLoginPageLbl.AutoSize = true;
             this.goLoginPageLbl.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.goLoginPageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.goLoginPageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.goLoginPageLbl.ForeColor = System.Drawing.SystemColors.GrayText;
             this.goLoginPageLbl.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.goLoginPageLbl.Location = new System.Drawing.Point(364, 551);
             this.goLoginPageLbl.MaximumSize = new System.Drawing.Size(150, 70);
             this.goLoginPageLbl.Name = "goLoginPageLbl";
-            this.goLoginPageLbl.Size = new System.Drawing.Size(44, 18);
+            this.goLoginPageLbl.Size = new System.Drawing.Size(50, 20);
             this.goLoginPageLbl.TabIndex = 10;
             this.goLoginPageLbl.Text = "Login";
             this.goLoginPageLbl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -139,11 +145,25 @@
             this.goLoginPageLbl.MouseEnter += new System.EventHandler(this.goLoginPageLbl_MouseEnter);
             this.goLoginPageLbl.MouseLeave += new System.EventHandler(this.goLoginPageLbl_MouseLeave);
             // 
+            // eyePass
+            // 
+            this.eyePass.BackgroundImage = global::Candy_Crush.Properties.Resources.eye_unhide;
+            this.eyePass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.eyePass.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.eyePass.Location = new System.Drawing.Point(595, 260);
+            this.eyePass.Name = "eyePass";
+            this.eyePass.Size = new System.Drawing.Size(45, 32);
+            this.eyePass.TabIndex = 11;
+            this.eyePass.UseVisualStyleBackColor = true;
+            this.eyePass.Click += new System.EventHandler(this.eyePass_Click);
+            // 
             // SignInForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.ClientSize = new System.Drawing.Size(782, 653);
+            this.Controls.Add(this.eyePass);
             this.Controls.Add(this.goLoginPageLbl);
             this.Controls.Add(this.cnfPasswordLbl);
             this.Controls.Add(this.cnfPasswordTxt);
@@ -152,6 +172,8 @@
             this.Controls.Add(this.passwordTxt);
             this.Controls.Add(this.usernameLbl);
             this.Controls.Add(this.usernameTxt);
+            this.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximumSize = new System.Drawing.Size(800, 700);
             this.MinimumSize = new System.Drawing.Size(800, 700);
             this.Name = "SignInForm";
@@ -172,5 +194,6 @@
         private System.Windows.Forms.Label cnfPasswordLbl;
         private System.Windows.Forms.TextBox cnfPasswordTxt;
         private System.Windows.Forms.Label goLoginPageLbl;
+        private System.Windows.Forms.Button eyePass;
     }
 }

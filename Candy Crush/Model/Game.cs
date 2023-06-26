@@ -15,96 +15,96 @@ namespace Candy_Crush
     internal class Game
     {
 
-        public Candy[,] gameTable { get; set; }
-        public Panel[,] gameTable1 { get; set; }
+        public Candy[,] gameMatrix { get; set; }
+        public PictureBox[,] gameMatrix1 { get; set; }
 
-        public int TableSize { get; set; } = 0;
+        public int GameMatrixSize { get; set; } = 0;
         public int Moves { get; set; } = 0;
 
         public int Score { get; set; } = 0;
 
         public Game(int size) {
-            gameTable = new Candy[size,size]; 
-            gameTable1= new Panel[size,size];
-            TableSize = size;
+            gameMatrix = new Candy[size,size]; 
+            gameMatrix1= new PictureBox[size,size];
+            GameMatrixSize = size;
         }
-        public void MakeRandomGameTable()
+        public void MakeRandomGameMatrix()
         {
-            for(int i = 0; i < TableSize; i++)
+            for(int i = 0; i < GameMatrixSize; i++)
             {
-                for (int j = 0; j < TableSize; j++)
+                for (int j = 0; j < GameMatrixSize; j++)
                 {
                     Candy candy = new Candy(GameForm.GetRandomNum(1, 5));
                     candy.Position = new Position(j, i);
-                    gameTable[j, i] = (candy);
+                    gameMatrix[j, i] = (candy);
                 }
             }
             
         }
 
-        public string GameTableToString()
+        public string GameMatrixToString()
         {
-            String gameTableString = "";
-            for (int i = 0; i < TableSize; i++)
+            String gameMatrixString = "";
+            for (int i = 0; i < GameMatrixSize; i++)
             {
-                for (int j = 0; j < TableSize; j++)
+                for (int j = 0; j < GameMatrixSize; j++)
                 {
-                    gameTableString+= gameTable[j, i].Value +"-";
+                    gameMatrixString+= gameMatrix[j, i].Value +"-";
                 }
             }
-            return gameTableString;
+            return gameMatrixString;
         }
 
-        public void StringToGameTable(string gameTableString)
+        public void StringTogameMatrix(string gameMatrixString)
         {
-            List<String> list = gameTableString.Split('-').ToList();
-            for (int i = 0; i < TableSize; i++)
+            List<String> list = gameMatrixString.Split('-').ToList();
+            for (int i = 0; i < GameMatrixSize; i++)
             {
-                for (int j = 0; j < TableSize; j++)
+                for (int j = 0; j < GameMatrixSize; j++)
                 {
                     Candy candy = new Candy(int.Parse(list[j + i * 10]));
                     candy.Position = new Position(j, i);
-                    gameTable[j, i] = (candy);
+                    gameMatrix[j, i] = (candy);
                 }
             }
         }
         public ref Candy GetCandyByPos(Position pos)
         {
-            return ref gameTable[pos.x, pos.y];
+            return ref gameMatrix[pos.x, pos.y];
 
         }
         public bool DoesThisPosExist(Position pos)
         {
-            if (pos.x < TableSize && pos.x>=0 && pos.y>=0&&pos.y<TableSize)
+            if (pos.x < GameMatrixSize && pos.x>=0 && pos.y>=0&&pos.y<GameMatrixSize)
             {
                 return true;
             }
             return false;
         }
 
-        public Panel GetPanelByPos(Position pos)
+        public PictureBox GetPanelByPos(Position pos)
         {
-            return gameTable1[pos.x, pos.y];
+            return gameMatrix1[pos.x, pos.y];
         }
         public List<Directions> checkMovingOptions(Position position)
         {
 
             List<Directions> directions = new List<Directions>();
-            if (position.x - 1 >= 0 && gameTable[position.x - 1, position.y].Value != gameTable[position.x,position.y].Value)
+            if (position.x - 1 >= 0 && gameMatrix[position.x - 1, position.y].Value != gameMatrix[position.x,position.y].Value)
             {
                 directions.Add(Directions.Left);
             }
-            if (position.x + 1 < 10 && gameTable[position.x +1, position.y].Value != gameTable[position.x, position.y].Value)
+            if (position.x + 1 < 10 && gameMatrix[position.x +1, position.y].Value != gameMatrix[position.x, position.y].Value)
             {
                 directions.Add(Directions.Right);
 
             }
-            if (position.y - 1 >= 0 && gameTable[position.x, position.y-1].Value != gameTable[position.x, position.y].Value)
+            if (position.y - 1 >= 0 && gameMatrix[position.x, position.y-1].Value != gameMatrix[position.x, position.y].Value)
             {
                 directions.Add(Directions.Up);
 
             }
-            if (position.y + 1 < 10 && gameTable[position.x , position.y+1].Value != gameTable[position.x, position.y].Value)
+            if (position.y + 1 < 10 && gameMatrix[position.x , position.y+1].Value != gameMatrix[position.x, position.y].Value)
             {
                 directions.Add(Directions.Down);
 
@@ -113,7 +113,7 @@ namespace Candy_Crush
         }
         private List<Candy> candies = new List<Candy>();
 
-        public bool IsExistInDestrotingCAndiesList(Position pos)
+        public bool IsExistInDestrotingCandiesList(Position pos)
         {
             for(int i=0; i< candies.Count; i++)
             {
@@ -124,39 +124,39 @@ namespace Candy_Crush
             }
             return false;
         }
-        public void FindDestroyableCandies(Position position, Directions opdirections1)
+        public void FindCandiesToDestroy(Position position, Directions opdirections1)
         {
             Position checkingPos = new Position(position.x - 1, position.y);
             if (opdirections1 != Directions.Left
                 && position.x - 1 >= 0
                 && GetCandyByPos(checkingPos).Value == GetCandyByPos(position).Value
-                && !IsExistInDestrotingCAndiesList(checkingPos)
+                && !IsExistInDestrotingCandiesList(checkingPos)
                 )
             {
                 candies.Add(GetCandyByPos(checkingPos));
-                FindDestroyableCandies(checkingPos, Directions.Right);
+                FindCandiesToDestroy(checkingPos, Directions.Right);
             }
 
             checkingPos = new Position(position.x + 1, position.y);
             if (opdirections1 != Directions.Right
                 && position.x + 1 < 10
                 && GetCandyByPos(checkingPos).Value == GetCandyByPos(position).Value
-                && !IsExistInDestrotingCAndiesList(checkingPos)
+                && !IsExistInDestrotingCandiesList(checkingPos)
                 )
             {
                 candies.Add(GetCandyByPos(checkingPos));
-                FindDestroyableCandies(checkingPos, Directions.Left);
+                FindCandiesToDestroy(checkingPos, Directions.Left);
             }
 
             checkingPos = new Position(position.x, position.y - 1);
             if (opdirections1 != Directions.Up
                 && position.y - 1 >= 0
                 && GetCandyByPos(checkingPos).Value == GetCandyByPos(position).Value
-                && !IsExistInDestrotingCAndiesList(checkingPos)
+                && !IsExistInDestrotingCandiesList(checkingPos)
                 )
             {
                 candies.Add(GetCandyByPos(checkingPos));
-                FindDestroyableCandies(checkingPos, Directions.Down);
+                FindCandiesToDestroy(checkingPos, Directions.Down);
             }
 
             checkingPos = new Position(position.x, position.y + 1);
@@ -164,19 +164,19 @@ namespace Candy_Crush
                 opdirections1 != Directions.Down
                 && position.y + 1 < 10
                 && GetCandyByPos(checkingPos).Value == GetCandyByPos(position).Value
-                &&!IsExistInDestrotingCAndiesList(checkingPos)
+                &&!IsExistInDestrotingCandiesList(checkingPos)
                )
             {
                 candies.Add(GetCandyByPos(checkingPos));
-                FindDestroyableCandies(checkingPos, Directions.Up);
+                FindCandiesToDestroy(checkingPos, Directions.Up);
             }
         }
 
-        public List<Candy> DestroyableCandies(Position position)
+        public List<Candy> ListOfDestroyableCandies(Position position)
         {
             candies.Clear();
-            candies.Add(gameTable[position.x, position.y]);
-            FindDestroyableCandies(position, Directions.Static);
+            candies.Add(gameMatrix[position.x, position.y]);
+            FindCandiesToDestroy(position, Directions.Static);
             return candies;
         }
 

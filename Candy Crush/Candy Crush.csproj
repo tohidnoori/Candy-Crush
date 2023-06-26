@@ -80,7 +80,6 @@
       <DependentUpon>SendFriendRequestForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Model\Candy.cs" />
-    <Compile Include="Model\Competetion.cs" />
     <Compile Include="Forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,7 +100,7 @@
     <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\GameDbModel.cs" />
+    <Compile Include="Model\Competetion.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,6 +136,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Forms\SignInForm.resx">
       <DependentUpon>SignInForm.cs</DependentUpon>
@@ -162,14 +162,13 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>CandyCrushDb.mdf</DependentUpon>
     </Content>
-    <Content Include="Images\bottom.png" />
     <Content Include="Images\candy1.png" />
     <Content Include="Images\candy2.png" />
     <Content Include="Images\candy3.png" />
     <Content Include="Images\candy4.png" />
-    <Content Include="Images\left.png" />
-    <Content Include="Images\right1.png" />
-    <Content Include="Images\up.png" />
+    <Content Include="Images\eye_hide.jpg" />
+    <Content Include="Images\eye_unhide.jpg" />
+    <Content Include="Images\logout.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">

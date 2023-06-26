@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,8 @@ namespace Candy_Crush.Forms
             SinglePlayerBtn.Location = new Point((this.Width - SinglePlayerBtn.Width) / 2, SinglePlayerBtn.Location.Y);
             TowPlayerBtn.Location = new Point((this.Width - TowPlayerBtn.Width) / 2, TowPlayerBtn.Location.Y);
             friendRequestBtn.Location = new Point((this.Width - friendRequestBtn.Width) / 2, friendRequestBtn.Location.Y);
-
-        }
+            candyCrushLbl.Location = new Point((this.Width - candyCrushLbl.Width) / 2, candyCrushLbl.Location.Y);
+          }
 
         private void SinglePlayerBtn_Click(object sender, EventArgs e)
         {
@@ -60,6 +61,21 @@ namespace Candy_Crush.Forms
             this.Hide();
             form.ShowDialog();
             this.Close();
+        }
+
+    
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SinglePlayerBtn_Paint_1(object sender, PaintEventArgs e)
+        {
+            this.SinglePlayerBtn.Paint += new System.Windows.Forms.PaintEventHandler(this.SinglePlayerBtn_Paint_1);
+            GraphicsPath grPath = new GraphicsPath();
+            grPath.AddEllipse(0, 0, SinglePlayerBtn.Width-10, SinglePlayerBtn.Height-10);
+           SinglePlayerBtn.Region = new System.Drawing.Region(grPath);
         }
     }
 }

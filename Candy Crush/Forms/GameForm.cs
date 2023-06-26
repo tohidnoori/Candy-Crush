@@ -22,20 +22,20 @@ namespace Candy_Crush
     public partial class GameForm : Form
     {
         private static readonly Random random = new Random();
-        Panel lastSelectedPanel = null;
+        PictureBox lastSelected = null;
         Game game;
         Player currentPlayer = new Player().LoadPlayerDataFromFile();
-        bool is2v2Game = false;
-        string gameTableString;
+        bool isCompetion= false;
+        string gameMatrixString;
         int gameId;
         public GameForm()
         {
             InitializeComponent();
         }
-        public GameForm(string gameTableString,int gameId)
+        public GameForm(string gameMatrixString,int gameId)
         {
-            is2v2Game = true;
-            this.gameTableString = gameTableString;
+            isCompetion = true;
+            this.gameMatrixString = gameMatrixString;
             this.gameId = gameId;
             InitializeComponent();
         }
@@ -44,82 +44,75 @@ namespace Candy_Crush
         {
             this.Location = new Point((SystemInformation.PrimaryMonitorSize.Width - this.Width) / 2, (SystemInformation.PrimaryMonitorSize.Height - this.Height) / 2);
             recordLbl.Text = "Record : " + currentPlayer.Record;
-            if (is2v2Game)
+            if (isCompetion)
             {
-                Make2vs2Game();
+                StartCompetion();
             }
             else
             {
-                MakeSingularGame();
+                StartSingularGame();
             }
 
             //MessageBox.Show(messages);
 
         }
 
-        private void MakeSingularGame()
+        private void StartSingularGame()
         {
             game = new Game(10);
-            Point gameTableStartPoint = new Point(20, 20);
+            Point gameMatrixStartPoint = new Point(20, 20);
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
                     PictureBox image = new PictureBox();
-                    Panel pan = new Panel();
                     Candy candy = new Candy(GetRandomNum(1, 5));
                     candy.Position = new Position(j, i);
-                    game.gameTable[j, i] = candy;
-                    pan.Size = new Size(60, 60);
-                    pan.Location = new Point(gameTableStartPoint.X + (65) * (j), gameTableStartPoint.Y + (65 * (i)));
+                    game.gameMatrix[j, i] = candy;
+                    image.Location = new Point(gameMatrixStartPoint.X + (65) * (j), gameMatrixStartPoint.Y + (65 * (i)));
                     image.Size = new Size(60, 60);
                     image.Image = Image.FromFile($@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\Candy{candy.Value}.png");
                     image.SizeMode = PictureBoxSizeMode.StretchImage;
                     //image.Location = new Point(5, 5);
-                    pan.Tag = candy;
-                    pan.Name = $"candy{i}{j}";
+                    image.Tag = candy;
+                    image.Name = $"candy{i}{j}";
                     image.Click += new System.EventHandler(this.candy_Click);
-
-                    pan.Controls.Add(image);
-                    game.gameTable1[j, i] = (pan);
-                    this.Controls.Add(pan);
+                    game.gameMatrix1[j, i] = (image);
+                    this.Controls.Add(image);
                 }
             }
         }
 
-        private void Make2vs2Game()
+        private void StartCompetion()
         {
             game = new Game(10);
-            game.StringToGameTable(gameTableString);
+            game.StringTogameMatrix(gameMatrixString);
 
-            Point gameTableStartPoint = new Point(20, 20);
+            Point gameMatrixStartPoint = new Point(20, 20);
 
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
                 {
                     PictureBox image = new PictureBox();
-                    Panel pan = new Panel();
-                    pan.Size = new Size(60, 60);
-                    pan.Location = new Point(gameTableStartPoint.X + (65) * (j), gameTableStartPoint.Y + (65 * (i)));
+                    image.Location = new Point(gameMatrixStartPoint.X + (65) * (j), gameMatrixStartPoint.Y + (65 * (i)));
                     image.Size = new Size(60, 60);
-                    image.Image = Image.FromFile($@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\Candy{game.gameTable[j, i].Value}.png");
+                    image.Image = Image.FromFile($@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\Candy{game.gameMatrix[j, i].Value}.png");
                     image.SizeMode = PictureBoxSizeMode.StretchImage;
                     //image.Location = new Point(5, 5);
-                    pan.Tag = game.gameTable[j, i];
-                    pan.Name = $"candy{i}{j}";
+                    image.Tag = game.gameMatrix[j, i];
+                    image.Name = $"candy{i}{j}";
                     image.Click += new System.EventHandler(this.candy_Click);
 
-                    pan.Controls.Add(image);
-                    game.gameTable1[j, i] = (pan);
-                    this.Controls.Add(pan);
+                    game.gameMatrix1[j, i] = (image);
+                    this.Controls.Add(image);
                 }
             }
         }
-        private Panel GetPanelByPosition(Position pos)
+        private PictureBox GetPictureBoxByPosition(Position pos)
         {
             int index = pos.y*10+ pos.x;
-             return this.Controls.OfType<Panel>().ToList()[index];
+             return this.Controls.OfType<PictureBox>().ToList()[index];
         }
 
         private async void DestroyCandies(List<Candy> candies)
@@ -128,27 +121,27 @@ namespace Candy_Crush
             for (int i = 0; i < candies.Count; i++)
             {
                 //message += "\n" + candies[i].Position.ToString();
-                //GetPanelByPosition(candies[i].Position).Visible = false;
-                GetPanelByPosition(candies[i].Position).Visible = false;
+                //GetPictureBoxByPosition(candies[i].Position).Visible = false;
+                GetPictureBoxByPosition(candies[i].Position).Visible = false;
                 game.GetCandyByPos(candies[i].Position).Value = 0;
             } 
         }
-        private  void SwitchingCandies(ref Panel panel1,ref Panel panel2)
+        private  void SwitchingCandies(ref PictureBox picture1,ref PictureBox picture2)
         {
             
-            var tempPanelImage = (panel1.Controls[0] as PictureBox).Image;
-            int tempCandyVal = (panel1.Tag as Candy).Value;
-            var tempPanelVisibility = (panel1).Visible;
+            var tempPictureBoxImage = (picture1).Image;
+            int tempCandyVal = (picture1.Tag as Candy).Value;
+            var tempPictureBoxVisibility = (picture1).Visible;
 
-            (panel1.Controls[0] as PictureBox).Image = (panel2.Controls[0] as PictureBox).Image;
-            (panel1.Tag as Candy).Value = (panel2.Tag as Candy).Value;
-            game.GetCandyByPos((panel1.Tag as Candy).Position).Value = (panel2.Tag as Candy).Value;
-            panel1.Visible = panel2.Visible;
+            (picture1).Image = (picture2).Image;
+            (picture1.Tag as Candy).Value = (picture2.Tag as Candy).Value;
+            game.GetCandyByPos((picture1.Tag as Candy).Position).Value = (picture2.Tag as Candy).Value;
+            picture1.Visible = picture2.Visible;
 
-            (panel2.Controls[0] as PictureBox).Image = tempPanelImage;
-            (panel2.Tag as Candy).Value = tempCandyVal;
-            game.GetCandyByPos((panel2.Tag as Candy).Position).Value = tempCandyVal;
-            panel2.Visible = tempPanelVisibility;
+            (picture2).Image = tempPictureBoxImage;
+            (picture2.Tag as Candy).Value = tempCandyVal;
+            game.GetCandyByPos((picture2.Tag as Candy).Position).Value = tempCandyVal;
+            picture2.Visible = tempPictureBoxVisibility;
 
             
         }
@@ -161,13 +154,13 @@ namespace Candy_Crush
             {
                 for (int j = 0; j < 10; j++)
                 {
-                    if (game.gameTable[i, j].Value == 0)
+                    if (game.gameMatrix[i, j].Value == 0)
                     {
                         int val = GetRandomNum(1, 5);
-                        game.gameTable[i, j].Value = val;
-                        Panel p = GetPanelByPosition(game.gameTable[i, j].Position);
-                        PictureBox a = p.Controls[0] as PictureBox;
-                        a.Image = Image.FromFile($@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\Candy{val}.png");
+                        game.gameMatrix[i, j].Value = val;
+                        
+                        PictureBox p = GetPictureBoxByPosition(game.gameMatrix[i, j].Position); ;
+                        p.Image = Image.FromFile($@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\Candy{val}.png");
                         (p.Tag as Candy).Value = val;
                         p.Visible = true;
                     }
@@ -186,16 +179,16 @@ namespace Candy_Crush
                 //loop through soton from bottom
                 for (int j = 9; j >= 0; j--)
                 {
-                    if (game.gameTable[i, j].Value == 0)
+                    if (game.gameMatrix[i, j].Value == 0)
                     {
-                        //message += "\n" + game.gameTable[i, j].Position;
+                        //message += "\n" + game.gameMatrix[i, j].Position;
                         for (int k = j - 1; k >= 0; k--)
                         {
-                            if (game.gameTable[i, k].Value != 0)
+                            if (game.gameMatrix[i, k].Value != 0)
                             {
-                                //message += $"\n switching {game.gameTable[i, j].Position.ToString()} with {game.gameTable[i, k].Position.ToString()}" ;
-                                Panel p1 = GetPanelByPosition(game.gameTable[i, k].Position);
-                                Panel p2 = GetPanelByPosition(game.gameTable[i, j].Position);
+                                //message += $"\n switching {game.gameMatrix[i, j].Position.ToString()} with {game.gameMatrix[i, k].Position.ToString()}" ;
+                                PictureBox p1 = GetPictureBoxByPosition(game.gameMatrix[i, k].Position);
+                                PictureBox p2 = GetPictureBoxByPosition(game.gameMatrix[i, j].Position);
                                 SwitchingCandies(ref p1, ref p2);
 
                                 break;
@@ -215,20 +208,20 @@ namespace Candy_Crush
         
         private void candy_Click(object sender, EventArgs e)
         {
-            Panel candyBox = ((PictureBox)sender).Parent as Panel;
-            Panel second = candyBox;
+            PictureBox candyBox = ((PictureBox)sender);
+            PictureBox second = candyBox;
             Check( candyBox,  second);
 
         }
 
-        private async void Check(Panel candyBox,  Panel second)
+        private async void Check(PictureBox candyBox, PictureBox second)
         {
             Candy secondCandy = second.Tag as Candy;
             if (game.Moves < 10)
             {
-                if (lastSelectedPanel != null && !(lastSelectedPanel.Tag as Candy).Position.Equal(secondCandy.Position))
+                if (lastSelected != null && !(lastSelected.Tag as Candy).Position.Equal(secondCandy.Position))
                 {
-                    Panel first = lastSelectedPanel;
+                    PictureBox first = lastSelected;
                     Candy firstCandy = first.Tag as Candy;
                     //osition newPos = new Position(changeCandy.Position.x, changeCandy.Position.y);
                     bool canTransfer = firstCandy.Position.CanChange(secondCandy.Position);
@@ -236,11 +229,11 @@ namespace Candy_Crush
 
                     if (canTransfer && firstCandy.Value != secondCandy.Value)
                     {
-                        //Panel changePanel = GetPanelByPosition(newPos);
+                        //Panel changePanel = GetPictureBoxByPosition(newPos);
                         game.Moves++;
                         movesLbl.Text = "Moves : " + game.Moves;
                         SwitchingCandies(ref second, ref first);
-                        List<Candy> candies = game.DestroyableCandies(secondCandy.Position);
+                        List<Candy> candies = game.ListOfDestroyableCandies(secondCandy.Position);
                         if (candies.Count >= 3)
                         {
                             game.Score += candies.Count * candies[0].Value;
@@ -256,16 +249,16 @@ namespace Candy_Crush
 
                         }
                     }
-                    lastSelectedPanel = null;
+                    lastSelected = null;
                 }
                 else
                 {
-                    lastSelectedPanel = candyBox;
+                    lastSelected = candyBox;
                 }
             }
             else
             {
-                if (!is2v2Game)
+                if (!isCompetion)
                 {
                     DialogResult result = MessageBox.Show($"Your moves finished and your score is {game.Score}.");
                     if (result == DialogResult.OK)
@@ -282,7 +275,7 @@ namespace Candy_Crush
                     DialogResult result = MessageBox.Show($"Your 2vs2 match has been ended with score of {game.Score} wait until game result.");
                     if (result == DialogResult.OK)
                     {
-                        Update2vs2GameData(game.Score);
+                        UpdateCompetionData(game.Score);
                         MainMenuForm form = new MainMenuForm();
                         this.Hide();
                         form.ShowDialog();
@@ -313,7 +306,7 @@ namespace Candy_Crush
             }
         }
 
-        private void Update2vs2GameData(int score)
+        private void UpdateCompetionData(int score)
         {
             SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\programming project\\csharp\\Candy Crush\\Candy Crush\\CandyCrushDb.mdf\";Integrated Security=True;MultipleActiveResultSets=True");
             connection.Open();

@@ -14,6 +14,7 @@ namespace Candy_Crush
 {
     public partial class SignInForm : Form
     {
+        private bool isHide = true;
         public SignInForm()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace Candy_Crush
 
         private void goLoginPageLbl_MouseEnter(object sender, EventArgs e)
         {
-            goLoginPageLbl.ForeColor = Color.Blue;
+            goLoginPageLbl.ForeColor = Color.LightPink;
 
         }
 
@@ -129,6 +130,24 @@ namespace Candy_Crush
             {
                 MessageBox.Show("User with this username already exsist");
                 return null;
+            }
+        }
+
+        private void eyePass_Click(object sender, EventArgs e)
+        {
+            if (isHide)
+            {
+                passwordTxt.UseSystemPasswordChar = false;
+                cnfPasswordTxt.UseSystemPasswordChar = false;
+                eyePass.BackgroundImage = Image.FromFile(@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\eye_hide.jpg");
+                isHide = false;
+            }
+            else
+            {
+                isHide = true;
+                eyePass.BackgroundImage = Image.FromFile(@"D:\programming project\csharp\Candy Crush\Candy Crush\Images\eye_unhide.jpg");
+                passwordTxt.UseSystemPasswordChar = true;
+                cnfPasswordTxt.UseSystemPasswordChar = true;
             }
         }
     }
