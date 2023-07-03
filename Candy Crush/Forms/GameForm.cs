@@ -149,7 +149,7 @@ namespace Candy_Crush
         private async void SettingRandomCandies()
         {
             // MessageBox.Show("");
-            await Task.Delay(300);
+            for (int i = 0; i < game.GameMatrixSize; i++)
             for (int i = 0; i < 10; i++)
             {
                 for (int j = 0; j < 10; j++)
